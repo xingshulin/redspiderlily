@@ -1,3 +1,9 @@
+#IDE files
+.idea/
+
+#Config files
+module/config.ini
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
