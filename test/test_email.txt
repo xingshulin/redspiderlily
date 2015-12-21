@@ -1,0 +1,73 @@
+From nobody Mon Dec 21 20:11:30 2015
+X-QQ-SSF: 0041000000000000
+X-QQ-FEAT: X7/CtZPNjEv8KILstG9lpi2G8epj4urD
+X-QQ-BUSINESS-ORIGIN: 1
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 114.242.199.181
+X-QQ-STYLE:
+X-QQ-mid: wapbizmail34t1450699434t77421
+From: "=?gb18030?B?zsS1zw==?=" <wendi@xingshulin.com>
+To: "=?gb18030?B?cWluaGFu?=" <qinhan@xingshulin.com>,
+ "=?gb18030?B?zfXV3A==?=" <wangzhe@xingshulin.com>
+Cc: "=?gb18030?B?vLzK9bK/?=" <tech@xingshulin.com>
+Subject: Re: test for imapclient
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="----=_NextPart_5677EAAA_09E271D0_783C9D95"
+Content-Transfer-Encoding: 8Bit
+Date: Mon, 21 Dec 2015 20:03:54 +0800
+X-Priority: 3
+Message-ID: <tencent_06A4AD4A47ED492F7A91366F@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+X-QQ-ReplyHash: 2869632775
+
+This is a multi-part message in MIME format.
+
+------=_NextPart_5677EAAA_09E271D0_783C9D95
+Content-Type: text/plain;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
+
+aW1hcCBjbGllbnSyu9OmuMPKx8TDwLTK1dPKvP61xMLwo78NCtXiw/fP1MrHuPZzbXRwILLi
+ytQNCrLuxsCVMIQzlTCEM5UwhDMgDQotLS0tLS0tLS0tLS0tLS0tLS0gT3JpZ2luYWwgLS0t
+LS0tLS0tLS0tLS0tLS0tDQpGcm9tOiAicWluaGFuIjxxaW5oYW5AeGluZ3NodWxpbi5jb20+
+DQpEYXRlOiBNb24sIERlYyAyMSwgMjAxNSAwNzoxMSBQTQ0KVG86ICLN9dXcIjx3YW5nemhl
+QHhpbmdzaHVsaW4uY29tPjsNCkNjOiAivLzK9bK/Ijx0ZWNoQHhpbmdzaHVsaW4uY29tPjsN
+ClN1YmplY3Q6IFJlOiB0ZXN0IGZvciBpbWFwY2xpZW50DQoNCg0KSXQgd29ya2VkDQoNCrei
+19TO0rXEIGlQaG9uZQ0KDQo+INTaIDIwMTXE6jEy1MIyMcjVo6wxOToxMKOszfXV3CA8d2Fu
+Z3poZUB4aW5nc2h1bGluLmNvbT4g0LS1wKO6DQo+IA0KPiB0ZXN0IGZvciBpbWFwY2xpZW50
+
+
+------=_NextPart_5677EAAA_09E271D0_783C9D95
+Content-Type: text/html;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
+
+aW1hcCZuYnNwO2NsaWVudLK706a4w8rHxMPAtMrV08q8/rXEwvCjvzxici8+1eLD98/Uyse4
+9nNtdHAmbmJzcDuy4srUPGJyLz6y7sbAlTCEM5UwhDOVMIQzJm5ic3A7PGRpdj48L2Rpdj48
+RElWIHN0eWxlPSJDT0xPUjogIzAwMCI+PERJViBzdHlsZT0iUEFERElORy1SSUdIVDogMHB4
+OyBQQURESU5HLUxFRlQ6IDBweDsgRk9OVC1TSVpFOiAxMnB4OyBQQURESU5HLUJPVFRPTTog
+MnB4OyBQQURESU5HLVRPUDogMnB4OyBGT05ULUZBTUlMWTogQXJpYWwgTmFycm93Ij4tLS0t
+LS0tLS0tLS0tLS0tLS0mbmJzcDtPcmlnaW5hbCZuYnNwOy0tLS0tLS0tLS0tLS0tLS0tLTwv
+RElWPjxESVYgc3R5bGU9IlBBRERJTkctUklHSFQ6IDhweDsgUEFERElORy1MRUZUOiA4cHg7
+IEZPTlQtU0laRTogMTJweDsgQkFDS0dST1VORDogI2VmZWZlZjsgUEFERElORy1CT1RUT006
+IDhweDsgUEFERElORy1UT1A6IDhweCI+PERJVj48Qj5Gcm9tOjwvQj4mbmJzcDsmcXVvdDtx
+aW5oYW4mcXVvdDsmbHQ7cWluaGFuQHhpbmdzaHVsaW4uY29tJmd0Ozx3YnIvPjwvRElWPjxE
+SVY+PEI+RGF0ZTo8L0I+Jm5ic3A7TW9uLCBEZWMgMjEsIDIwMTUgMDc6MTEgUE08L0RJVj48
+RElWPjxCPlRvOjwvQj4mbmJzcDsmcXVvdDvN9dXcJnF1b3Q7Jmx0O3dhbmd6aGVAeGluZ3No
+dWxpbi5jb20mZ3Q7OzwvRElWPjxESVY+PEI+Q2M6PC9CPiZuYnNwOyZxdW90O7y8yvWyvyZx
+dW90OyZsdDt0ZWNoQHhpbmdzaHVsaW4uY29tJmd0Ozs8L0RJVj48RElWPjxCPlN1YmplY3Q6
+PC9CPiZuYnNwO1JlOiB0ZXN0IGZvciBpbWFwY2xpZW50PC9ESVY+PC9ESVY+PC9ESVY+SXQg
+d29ya2VkPGJyLz48YnIvPrei19TO0rXEIGlQaG9uZTxici8+PGJyLz4mZ3Q7INTaIDIwMTXE
+6jEy1MIyMcjVo6wxOToxMKOszfXV3CAmbHQ7d2FuZ3poZUB4aW5nc2h1bGluLmNvbSZndDsg
+0LS1wKO6PGJyLz4mZ3Q7IDxici8+Jmd0OyB0ZXN0IGZvciBpbWFwY2xpZW50PGJyLz4=
+
+------=_NextPart_5677EAAA_09E271D0_783C9D95--
+
+
+Date:Mon, 21 Dec 2015 20:03:54 +0800
+From:"=?gb18030?B?zsS1zw==?=" <wendi@xingshulin.com>
+Subject:Re: test for imapclient
+[<email.message.Message instance at 0x10ab67758>, <email.message.Message instance at 0x10ab67680>]
