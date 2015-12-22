@@ -23,7 +23,6 @@ def save_full_messages(search_ids=[]):
         msgStringParsed = email.message_from_string(messageString)
         subject = get_subject(msgStringParsed['Subject'])
         sender = get_sender(msgStringParsed['From'])
-        receivers = get_receivers(msgStringParsed['To'])
         if is_reply_mail(subject):
             continue
         sum_num += 1
@@ -38,7 +37,7 @@ ssl = False
 
 server = IMAPClient(host, use_uid=True, ssl=ssl)
 server.login(username, password)
-select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/test')
+select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/study')
 print('%d messages in study' % select_info['EXISTS'])
 
 messages = server.search(['NOT', 'DELETED'])
