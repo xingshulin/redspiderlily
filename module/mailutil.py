@@ -1,6 +1,6 @@
-import email
-
+# -*- coding: utf-8 -*-
 __author__ = 'Jack'
+import email
 
 
 def to_unicode(s, encoding):
@@ -39,3 +39,8 @@ def get_receivers(msg_to):
 def get_subject(msg_subject):
     subject = email.Header.decode_header(msg_subject)
     return to_unicode(subject[0][0], subject[0][1])
+
+
+def is_reply_mail(subject_):
+    subject_ = subject_.encode('utf-8')
+    return ("回复" in subject_.lower()) or ("re:" in subject_.lower())

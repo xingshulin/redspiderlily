@@ -6,7 +6,7 @@ import sys
 from unittest2 import TestCase
 from module import settings
 
-from module.mailutil import get_sender, get_subject, get_receivers
+from module.mailutil import get_sender, get_subject, get_receivers, is_reply_mail
 
 __author__ = 'Jack'
 
@@ -91,3 +91,11 @@ class SimpleTest(TestCase):
     def test_string(self):
         if "tech@xingshulin.com" in u"技术部<tech@xingshulin.com>":
             print "cool"
+
+    def test_is_reply_mail_when_contains_re(self):
+        subject_with_chinese = u"Re: 回复：浅谈懒人模式"
+        subject_with_english = u"Re: test for imapclient"
+        subject_with_no_re = u"浅谈懒人模式"
+        self.assertTrue(is_reply_mail(subject_with_chinese))
+        self.assertTrue(is_reply_mail(subject_with_english))
+        self.assertFalse(is_reply_mail(subject_with_no_re))

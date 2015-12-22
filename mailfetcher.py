@@ -8,9 +8,28 @@
 from __future__ import unicode_literals
 import email
 from imapclient import IMAPClient
-from mailutil import get_subject, get_sender, get_receivers
+from module.mailutil import get_subject, get_sender, get_receivers, is_reply_mail
 from module import settings
 
+
+def save_full_messages(search_ids=[]):
+    sum_num = 0
+    check_num = 0
+    for msgid in search_ids:
+        check_num += 1
+        print "checking... %s" % check_num
+        response = server.fetch(msgid, ['RFC822'])
+        messageString = response[msgid]['RFC822']
+        msgStringParsed = email.message_from_string(messageString)
+        subject = get_subject(msgStringParsed['Subject'])
+        sender = get_sender(msgStringParsed['From'])
+        receivers = get_receivers(msgStringParsed['To'])
+        if is_reply_mail(subject):
+            continue
+        sum_num += 1
+        print 'From:%s Subject:%s\n' % \
+              (sender, subject)
+    return sum_num
 
 host = settings.get('HOST')
 username = settings.get('USERNAME')
@@ -26,14 +45,6 @@ messages = server.search(['NOT', 'DELETED'])
 print("%d messages that aren't deleted" % len(messages))
 print messages
 print("Messages:")
-for msgid in messages:
-    response = server.fetch(msgid, ['RFC822'])
-    messageString = response[msgid]['RFC822']
-    msgStringParsed = email.message_from_string(messageString)
-    subject = get_subject(msgStringParsed['Subject'])
-    sender = get_sender(msgStringParsed['From'])
-    receivers = get_receivers(msgStringParsed['To'])
-    if (len(receivers) != 1) or ("tech@xingshulin.com" not in receivers[0]):
-        continue
-    print 'From:%s Subject:%s\n' % \
-          (sender, subject)
+total_subjects = save_full_messages(messages)
+
+print "总数为 %s" % total_subjects
