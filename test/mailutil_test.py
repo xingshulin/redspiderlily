@@ -4,17 +4,14 @@ from operator import add
 import sys
 
 from unittest2 import TestCase
+from module import settings
 
 from module.mailutil import get_sender, get_subject, get_receivers
 
 __author__ = 'Jack'
 
-
-reload(sys)
-sys.setdefaultencoding('gbk')
-
 def get_charset(message, default="ascii"):
-    #Get the message charset
+    # Get the message charset
     return message.get_charset()
     return default
 
@@ -90,11 +87,6 @@ class SimpleTest(TestCase):
     def test_format_body(self):
         file_path = "./"
         mailContent, suffix = get_body(msgStringParsed, file_path)
-        #
-        # receivers = get_receivers(msgStringParsed["to"])
-        # self.assertEqual(u"qinhan<qinhan@xingshulin.com>", receivers[0])
-        # self.assertEqual(u"王哲<wangzhe@xingshulin.com>", receivers[1])
-        # self.assertNotEqual(u"技术部<tech@xingshulin.com>", receivers[0])
 
     def test_string(self):
         if "tech@xingshulin.com" in u"技术部<tech@xingshulin.com>":

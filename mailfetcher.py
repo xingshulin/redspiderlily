@@ -7,9 +7,7 @@
 
 from __future__ import unicode_literals
 import email
-
 from imapclient import IMAPClient
-
 from mailutil import get_subject, get_sender, get_receivers
 from module import settings
 
@@ -21,15 +19,13 @@ ssl = False
 
 server = IMAPClient(host, use_uid=True, ssl=ssl)
 server.login(username, password)
-
-select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/study')
+select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/test')
 print('%d messages in study' % select_info['EXISTS'])
 
 messages = server.search(['NOT', 'DELETED'])
 print("%d messages that aren't deleted" % len(messages))
 print messages
 print("Messages:")
-index_num = 0
 for msgid in messages:
     response = server.fetch(msgid, ['RFC822'])
     messageString = response[msgid]['RFC822']
