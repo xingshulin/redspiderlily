@@ -10,7 +10,7 @@ import email
 
 from imapclient import IMAPClient
 
-from mailutil import get_subject, get_sender
+from mailutil import get_subject, get_sender, get_receivers
 from module import settings
 
 
@@ -22,19 +22,22 @@ ssl = False
 server = IMAPClient(host, use_uid=True, ssl=ssl)
 server.login(username, password)
 
-select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/test')
+select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/study')
 print('%d messages in study' % select_info['EXISTS'])
 
 messages = server.search(['NOT', 'DELETED'])
 print("%d messages that aren't deleted" % len(messages))
-
+print messages
 print("Messages:")
-response = server.fetch(messages, ['RFC822'])
-for msgid, data in response.iteritems():
-    messageString = data['RFC822']
+index_num = 0
+for msgid in messages:
+    response = server.fetch(msgid, ['RFC822'])
+    messageString = response[msgid]['RFC822']
     msgStringParsed = email.message_from_string(messageString)
     subject = get_subject(msgStringParsed['Subject'])
     sender = get_sender(msgStringParsed['From'])
-    date = msgStringParsed['date']
-    print 'Date:%s\nFrom:%s\nSubject:%s\n%s' % \
-          (date, sender, subject, msgStringParsed.get_payload())
+    receivers = get_receivers(msgStringParsed['To'])
+    if (len(receivers) != 1) or ("tech@xingshulin.com" not in receivers[0]):
+        continue
+    print 'From:%s Subject:%s\n' % \
+          (sender, subject)
