@@ -37,7 +37,7 @@ def get_from_addr_from_envelope(envelope):
 
 
 def list_message_headers(search_ids=[]):
-    sum_num = 0
+    senderlist = []
     check_num = 0
     for msgid in search_ids:
         check_num += 1
@@ -48,14 +48,14 @@ def list_message_headers(search_ids=[]):
         sender = get_sender(get_from_addr_from_envelope(envelope))
         if is_reply_mail(subject):
             continue
-        sum_num += 1
+        senderlist.append(sender)
         print 'From:%s Subject:%s\n' % (sender, subject)
-    return sum_num
+    return senderlist
 
 
-host = settings.get('HOST')
-username = settings.get('USERNAME')
-password = settings.get('PASSWORD')
+host = settings.get('EMAIL_HOST')
+username = settings.get('EMAIL_USERNAME')
+password = settings.get('EMAIL_PASSWORD')
 ssl = False
 
 server = IMAPClient(host, use_uid=True, ssl=ssl)
@@ -67,7 +67,7 @@ messages = server.search(['NOT', 'DELETED'])
 print("%d messages that aren't deleted" % len(messages))
 print messages
 print("Messages:")
-total_subjects = list_message_headers(messages)
+senders = list_message_headers(messages)
 # total_subjects = save_full_messages(messages)
 
-print "总数为 %s" % total_subjects
+print "总数为 %s" % len(senders)
