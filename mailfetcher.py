@@ -6,6 +6,7 @@
 # modified by Jack Wang
 
 from __future__ import unicode_literals
+from datetime import date
 import email
 
 from imapclient import IMAPClient
@@ -40,8 +41,8 @@ def list_message_headers(search_ids=[]):
     senderlist = []
     check_num = 0
     for msgid in search_ids:
-        check_num += 1
-        print "checking... %s" % check_num
+        # check_num += 1
+        # print "checking... %s" % check_num
         response = server.fetch(msgid, ['ENVELOPE'])
         envelope = response[msgid]['ENVELOPE']
         subject = get_subject(envelope.subject)
@@ -49,7 +50,7 @@ def list_message_headers(search_ids=[]):
         if is_reply_mail(subject):
             continue
         senderlist.append(sender)
-        print 'From:%s Subject:%s\n' % (sender, subject)
+        print 'From:%s Subject:%s' % (sender, subject)
     return senderlist
 
 
@@ -63,7 +64,7 @@ server.login(username, password)
 select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/study')
 print('%d messages in study' % select_info['EXISTS'])
 
-messages = server.search(['NOT', 'DELETED'])
+messages = server.search(['NOT', 'DELETED', 'SINCE', date(2015, 12, 7), 'BEFORE', date(2015, 12, 23)])
 print("%d messages that aren't deleted" % len(messages))
 print messages
 print("Messages:")
