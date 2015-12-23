@@ -16,6 +16,12 @@ from module.mailutil import get_subject, get_sender, is_reply_mail, combine_send
 from module import settings
 
 
+host = settings.get('EMAIL_HOST')
+username = settings.get('EMAIL_USERNAME')
+password = settings.get('EMAIL_PASSWORD')
+ssl = False
+
+
 def save_full_messages(search_ids=[]):
     sum_num = 0
     check_num = 0
@@ -40,7 +46,7 @@ def get_from_addr_from_envelope(envelope):
 
 def list_message_headers(search_ids=[]):
     senderlist = []
-    titlelist = []
+    subjectlist = []
     check_num = 0
     for msgid in search_ids:
         # check_num += 1
@@ -52,26 +58,28 @@ def list_message_headers(search_ids=[]):
         if is_reply_mail(subject):
             continue
         senderlist.append(sender)
-        titlelist.append(combine_sender_n_subject(sender, subject))
+        subjectlist.append(subject)
         print 'From:%s Subject:%s' % (sender, subject)
-    return titlelist, senderlist
+    return senderlist, subjectlist
 
 
-host = settings.get('EMAIL_HOST')
-username = settings.get('EMAIL_USERNAME')
-password = settings.get('EMAIL_PASSWORD')
-ssl = False
+def get_mail_titles():
+    global server
+    server = IMAPClient(host, use_uid=True, ssl=ssl)
+    server.login(username, password)
+    select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/study')
+    print('%d messages in study' % select_info['EXISTS'])
 
-server = IMAPClient(host, use_uid=True, ssl=ssl)
-server.login(username, password)
-select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/study')
-print('%d messages in study' % select_info['EXISTS'])
+    messages = server.search(['NOT', 'DELETED', 'SINCE', date(2015, 12, 7), 'BEFORE', date(2015, 12, 23)])
+    print("%d messages that aren't deleted" % len(messages))
+    print messages
+    print("Messages:")
+    senders, subjects = list_message_headers(messages)
+    # total_subjects = save_full_messages(messages)
 
-messages = server.search(['NOT', 'DELETED', 'SINCE', date(2015, 12, 7), 'BEFORE', date(2015, 12, 23)])
-print("%d messages that aren't deleted" % len(messages))
-print messages
-print("Messages:")
-titles, senders = list_message_headers(messages)
-# total_subjects = save_full_messages(messages)
-write_cvs_items(rows=titles)
-print "总数为 %s" % len(senders)
+    titles = []
+    for (sender, subject) in zip(senders, subjects):
+        titles.append(combine_sender_n_subject(sender, subject))
+    write_cvs_items(rows=titles)
+    print "总数为 %s" % len(senders)
+    return senders
