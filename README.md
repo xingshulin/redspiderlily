@@ -6,7 +6,7 @@ red spider lily, a legendary flower, bloom at the edge of life and death. Also, 
 It also contains some example of how to use imapclient.
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 python mailfetch.py
 ```
 
