@@ -7,13 +7,12 @@ It also contains some example of how to use imapclient.
 
 ```
 pip install -r requirements.txt
-python mailfetch.py
+python main.py
 ```
 
 ### Features
 *	export the ones who send artiles
 *	store the XSLers and their artile titles
 *	compare and find out the ones who are not send yet
-
 
 ![Red Spider Lily](https://github.com/xingshulin/redspiderlily/blob/master/red_spider_lily.jpg)
