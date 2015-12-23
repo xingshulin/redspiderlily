@@ -44,3 +44,7 @@ def get_subject(msg_subject):
 def is_reply_mail(subject_):
     subject_ = subject_.encode('utf-8')
     return ("回复" in subject_.lower()) or ("re:" in subject_.lower())
+
+
+def combine_sender_n_subject(sender, subject):
+    return sender + '|' + subject.replace(',', '_')

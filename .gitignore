@@ -1,6 +1,9 @@
 #IDE files
 .idea/
 
+#Temp generated files
+*.csv
+
 #Config files
 module/config.ini
 

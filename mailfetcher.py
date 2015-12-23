@@ -11,7 +11,8 @@ import email
 
 from imapclient import IMAPClient
 
-from module.mailutil import get_subject, get_sender, is_reply_mail
+from module.fileutil import write_cvs_items
+from module.mailutil import get_subject, get_sender, is_reply_mail, combine_sender_n_subject
 from module import settings
 
 
@@ -39,6 +40,7 @@ def get_from_addr_from_envelope(envelope):
 
 def list_message_headers(search_ids=[]):
     senderlist = []
+    titlelist = []
     check_num = 0
     for msgid in search_ids:
         # check_num += 1
@@ -50,8 +52,9 @@ def list_message_headers(search_ids=[]):
         if is_reply_mail(subject):
             continue
         senderlist.append(sender)
+        titlelist.append(combine_sender_n_subject(sender, subject))
         print 'From:%s Subject:%s' % (sender, subject)
-    return senderlist
+    return titlelist, senderlist
 
 
 host = settings.get('EMAIL_HOST')
@@ -68,7 +71,7 @@ messages = server.search(['NOT', 'DELETED', 'SINCE', date(2015, 12, 7), 'BEFORE'
 print("%d messages that aren't deleted" % len(messages))
 print messages
 print("Messages:")
-senders = list_message_headers(messages)
+titles, senders = list_message_headers(messages)
 # total_subjects = save_full_messages(messages)
-
+write_cvs_items(rows=titles)
 print "总数为 %s" % len(senders)
