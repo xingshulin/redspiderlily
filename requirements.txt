@@ -1,3 +1,4 @@
+django
 unittest2
-IMAPClient==1.0.0
+IMAPClient==1.0.1
 mock
