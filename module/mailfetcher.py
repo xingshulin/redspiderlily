@@ -5,7 +5,6 @@
 # Please see http://en.wikipedia.org/wiki/BSD_licenses
 # modified by Jack Wang
 
-from __future__ import unicode_literals
 from datetime import date
 import email
 
@@ -19,7 +18,9 @@ from module import settings
 host = settings.get('EMAIL_HOST')
 username = settings.get('EMAIL_USERNAME')
 password = settings.get('EMAIL_PASSWORD')
+folder_study = settings.get('FOLDER_STUDY')
 ssl = False
+server = IMAPClient(host, use_uid=True, ssl=ssl)
 
 
 def save_full_messages(search_ids=[]):
@@ -27,7 +28,7 @@ def save_full_messages(search_ids=[]):
     check_num = 0
     for msgid in search_ids:
         check_num += 1
-        print "checking... %s" % check_num
+        print("checking... %s" % check_num)
         response = server.fetch(msgid, ['RFC822'])
         messageString = response[msgid]['RFC822']
         msgStringParsed = email.message_from_string(messageString)
@@ -36,7 +37,7 @@ def save_full_messages(search_ids=[]):
         if is_reply_mail(subject):
             continue
         sum_num += 1
-        print 'From:%s Subject:%s\n' % (sender, subject)
+        print('From:%s Subject:%s\n' % (sender, subject))
     return sum_num
 
 
@@ -45,41 +46,52 @@ def get_from_addr_from_envelope(envelope):
 
 
 def list_message_headers(search_ids=[]):
-    senderlist = []
-    subjectlist = []
+    sender_list = []
+    subject_list = []
+    date_list= []
     check_num = 0
     for msgid in search_ids:
         # check_num += 1
         # print "checking... %s" % check_num
-        response = server.fetch(msgid, ['ENVELOPE'])
-        envelope = response[msgid]['ENVELOPE']
+        response = server.fetch(msgid, [b'ENVELOPE'])
+        envelope = response[msgid][b'ENVELOPE']
         subject = get_subject(envelope.subject)
+        _date = get_subject(envelope.date)
         sender = get_sender(get_from_addr_from_envelope(envelope))
         if is_reply_mail(subject):
             continue
-        senderlist.append(sender)
-        subjectlist.append(subject)
-        print 'From:%s Subject:%s' % (sender, subject)
-    return senderlist, subjectlist
+        sender_list.append(sender)
+        date_list.append(_date)
+        subject_list.append(subject)
+        print('From:%s Subject:%s' % (sender, subject))
+    return sender_list, date_list, subject_list
 
 
 def get_mail_titles():
-    global server
-    server = IMAPClient(host, use_uid=True, ssl=ssl)
     server.login(username, password)
-    select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/study')
-    print('%d messages in study' % select_info['EXISTS'])
+    print(folder_study.encode('utf-8'))
+    select_info = server.select_folder(folder_study)
+    # select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/trash')
+    print('%d messages in trash' % select_info[b'EXISTS'])
 
-    messages = server.search(['NOT', 'DELETED', 'SINCE', date(2015, 12, 7), 'BEFORE', date(2015, 12, 23)])
-    print("%d messages that aren't deleted" % len(messages))
-    print messages
+    messages_since = server.search([u'UNSEEN', u'SINCE', date(2016, 4, 7)])
+    messages_before = server.search([u'UNSEEN', u'BEFORE', date(2016, 5, 18)])
+    messages = list(set(messages_since) & set(messages_before))
+    print("%d messages that aren't seen" % len(messages))
+    print(messages)
+
+    # server.add_flags(messages, '\Seen')
+# u'UNSEEN',
     print("Messages:")
-    senders, subjects = list_message_headers(messages)
+    senders, dates, subjects = list_message_headers(messages)
     # total_subjects = save_full_messages(messages)
+    print(dates)
 
     titles = []
     for (sender, subject) in zip(senders, subjects):
         titles.append(combine_sender_n_subject(sender, subject))
     write_cvs_items(rows=titles)
-    print "总数为 %s" % len(senders)
+    print("总数为 %s" % len(senders))
+
+    server.logout()
     return senders

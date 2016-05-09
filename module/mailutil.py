@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
+from email.header import decode_header
 __author__ = 'Jack'
-import email
 
 
 def to_unicode(s, encoding):
     if encoding:
-        return unicode(s, encoding)
+        return s.decode(encoding)
     else:
-        return unicode(s)
+        return s
 
 
 def parse_address(msg_addr):
     msg_addr = msg_addr.strip(' ')
     msg_pair = msg_addr.split(' ')
     if len(msg_pair) == 2:
-        mail_name = email.Header.decode_header((msg_pair[0]).strip('\"'))[0]
+        mail_name = decode_header((msg_pair[0]).strip('\"'))[0]
         mail_address = msg_pair[1]
         full_address = to_unicode(mail_name[0], mail_name[1]) + mail_address
     else:
@@ -37,13 +37,15 @@ def get_receivers(msg_to):
 
 
 def get_subject(msg_subject):
-    subject = email.Header.decode_header(msg_subject)
+    if isinstance(msg_subject, bytes):
+        msg_subject = msg_subject.decode('utf-8')
+    subject = decode_header(str(msg_subject))
     return to_unicode(subject[0][0], subject[0][1])
 
 
-def is_reply_mail(subject_):
-    subject_ = subject_.encode('utf-8')
-    return ("回复" in subject_.lower()) or ("re:" in subject_.lower())
+def is_reply_mail(_subject):
+    _subject = _subject
+    return ("回复" in _subject.lower()) or ("re:" in _subject.lower())
 
 
 def combine_sender_n_subject(sender, subject):

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import MySQLdb
+import PyMySQL
 
 from module import settings
 
@@ -17,7 +17,7 @@ namesql = settings.get('SQL_NAME')
 def open_db():
     global db, cursor
 
-    db = MySQLdb.connect(host=host, port=int(port), user=username, passwd=password, db=database)
+    db = PyMySQL.connect(host=host, port=int(port), user=username, passwd=password, db=database)
     cursor = db.cursor()
 
 
@@ -43,7 +43,7 @@ def get_names():
         names_from_db = retrieve_data_from_db(namesql)
         for name in names_from_db:
             names.append(name[0].strip(','))
-    except Exception, e:
-        print e
-        print "Error: unable to fecth data"
+    except Exception as e:
+        print(e)
+        print("Error: unable to fecth data")
     return names

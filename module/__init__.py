@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import os
+import sys
 
 __all__ = ['settings']
 
@@ -24,10 +26,9 @@ settings = dict()
 wsdl_url = username = password = None
 
 if os.path.exists(CFG_PATH):
-    from ConfigParser import SafeConfigParser
-
-    parser = SafeConfigParser()
-    parser.read(CFG_PATH)
+    from configparser import ConfigParser
+    parser = ConfigParser()
+    parser.read(CFG_PATH, encoding='utf-8')
 
     email_username = parser.get('EMAIL', 'username')
     email_password = parser.get('EMAIL', 'password')
@@ -39,6 +40,8 @@ if os.path.exists(CFG_PATH):
     database_database = parser.get('DATABASE', 'database')
     database_username = parser.get('DATABASE', 'username')
     database_password = parser.get('DATABASE', 'password')
+
+    folder_study = parser.get('FOLDER', 'study')
 
     sql_names = parser.get('SQL', 'names')
 else:
@@ -57,6 +60,7 @@ settings['DATABASE_PORT'] = database_port
 settings['DATABASE_USERNAME'] = database_username
 settings['DATABASE_PASSWORD'] = database_password
 settings['DATABASE_DATABASE'] = database_database
+settings['FOLDER_STUDY'] = folder_study
 settings['SQL_NAME'] = sql_names
 
 settings['EMAIL_USERNAME'] = email_username
