@@ -74,8 +74,8 @@ def get_mail_titles():
     # select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/trash')
     print('%d messages in trash' % select_info[b'EXISTS'])
 
-    messages_since = server.search([u'UNSEEN', u'SINCE', date(2016, 4, 7)])
-    messages_before = server.search([u'UNSEEN', u'BEFORE', date(2016, 5, 18)])
+    messages_since = server.search([u'SEEN', u'SINCE', date(2015, 12, 7)])
+    messages_before = server.search([u'SEEN', u'BEFORE', date(2016, 5, 18)])
     messages = list(set(messages_since) & set(messages_before))
     print("%d messages that aren't seen" % len(messages))
     print(messages)

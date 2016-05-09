@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import PyMySQL
-
+import pymysql.cursors
 from module import settings
 
 
@@ -12,17 +11,16 @@ database = settings.get('DATABASE_DATABASE')
 username = settings.get('DATABASE_USERNAME')
 password = settings.get('DATABASE_PASSWORD')
 namesql = settings.get('SQL_NAME')
+db = None
 
 
 def open_db():
-    global db, cursor
-
-    db = PyMySQL.connect(host=host, port=int(port), user=username, passwd=password, db=database)
-    cursor = db.cursor()
+    db = pymysql.connect(host=host, port=int(port), user=username, passwd=password, db=database)
+    return db.cursor()
 
 
 def retrieve_data_from_db(sql):
-    open_db()
+    cursor = open_db()
 
     # Execute the SQL command
     cursor.execute(sql)
