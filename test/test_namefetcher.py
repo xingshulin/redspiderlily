@@ -16,7 +16,7 @@ class MailFetcherTest(TestCase):
         """----------------Verify behavior-----------------------------"""
         result = get_names()
         self.assertEqual(len(result), 3)
-        print "second name is %s" % result[1]
+        print("second name is %s" % result[1])
         self.assertEqual(result[0], 'prettyboy')
         self.assertEqual(result[2], 'spikerlily')
 
