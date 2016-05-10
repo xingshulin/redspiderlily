@@ -48,50 +48,38 @@ def get_from_addr_from_envelope(envelope):
 def list_message_headers(search_ids=[]):
     sender_list = []
     subject_list = []
-    date_list= []
-    check_num = 0
     for msgid in search_ids:
-        # check_num += 1
-        # print "checking... %s" % check_num
         response = server.fetch(msgid, [b'ENVELOPE'])
         envelope = response[msgid][b'ENVELOPE']
         subject = get_subject(envelope.subject)
-        _date = get_subject(envelope.date)
         sender = get_sender(get_from_addr_from_envelope(envelope))
         if is_reply_mail(subject):
             continue
         sender_list.append(sender)
-        date_list.append(_date)
         subject_list.append(subject)
         print('From:%s Subject:%s' % (sender, subject))
-    return sender_list, date_list, subject_list
+    return sender_list, subject_list
 
 
-def get_mail_titles():
+def get_mail_senders_and_subjects_by_duration(_from=date(2015, 5, 1), _to=date(2016, 5, 1)):
     server.login(username, password)
-    print(folder_study.encode('utf-8'))
     select_info = server.select_folder(folder_study)
-    # select_info = server.select_folder(u'\u5176\u4ed6\u6587\u4ef6\u5939/trash')
-    print('%d messages in trash' % select_info[b'EXISTS'])
+    print('%d messages in study' % select_info[b'EXISTS'])
 
-    messages_since = server.search([u'SEEN', u'SINCE', date(2015, 12, 7)])
-    messages_before = server.search([u'SEEN', u'BEFORE', date(2016, 5, 18)])
+    messages_since = server.search([u'SINCE', _from])
+    messages_before = server.search([u'BEFORE', _to])
     messages = list(set(messages_since) & set(messages_before))
-    print("%d messages that aren't seen" % len(messages))
-    print(messages)
+    print("%d messages that are in duration" % len(messages))
 
-    # server.add_flags(messages, '\Seen')
-# u'UNSEEN',
     print("Messages:")
-    senders, dates, subjects = list_message_headers(messages)
+    senders, subjects = list_message_headers(messages)
     # total_subjects = save_full_messages(messages)
-    print(dates)
 
-    titles = []
+    subjects = []
     for (sender, subject) in zip(senders, subjects):
-        titles.append(combine_sender_n_subject(sender, subject))
-    write_cvs_items(rows=titles)
+        subjects.append(combine_sender_n_subject(sender, subject))
+    write_cvs_items(rows=subjects)
     print("总数为 %s" % len(senders))
 
     server.logout()
-    return senders
+    return senders, subjects
