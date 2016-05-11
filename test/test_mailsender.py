@@ -3,7 +3,7 @@ from datetime import date
 
 from unittest2 import TestCase
 
-from module.report import is_odd_week, is_even_week
+from module.mailsender import send, generate_body
 
 __author__ = 'Jack'
 
@@ -26,13 +26,26 @@ class ReportGeneratorTest(TestCase):
         # self.assertEqual(result, date(2016, 5, 1))
         pass
 
-    def test_is_odd_week_when_gap_equal_to_7(self):
-        self.assertTrue(is_odd_week(date(2016, 5, 9), date(2016, 5, 16)))
+    @staticmethod
+    def test_smtp_sender_works():
+        article_list = {'abc': 'jack@xingshulin.com', 'bcd': 'john@xingshulin.com'}
+        test_content = {'to': 'wangzhe@xingshulin.com',
+                        'subject': '[双周学习分享]单周总结',
+                        'article_dict': article_list,
+                        'compliance_dict': None,
+                        'noncompliance_dict': None}
+        send(test_content)
+        print("mail had been sent")
 
-    def test_is_even_week_when_gap_equal_to_14(self):
-        self.assertFalse(is_odd_week(date(2016, 5, 9), date(2016, 5, 23)))
-        self.assertTrue(is_even_week(date(2016, 5, 9), date(2016, 5, 23)))
-
-    def test_is_summary_when_gap_not_equal_to_7_or_14(self):
-        self.assertFalse(is_odd_week(date(2016, 4, 9), date(2016, 5, 23)))
-        self.assertFalse(is_even_week(date(2016, 4, 9), date(2016, 5, 23)))
+    def test_smtp_generate_body_properly(self):
+        test_file = open('template/odd_email_test_file.html', 'r', encoding='utf-8')
+        test_data = test_file.read().replace('\n', '').replace(' ', '')
+        print(test_data)
+        article_list = {'abc': 'jack@xingshulin.com', 'bcd': 'john@xingshulin.com'}
+        test_content = {'to': 'wangzhe@xingshulin.com',
+                        'subject': '[双周学习分享]单周总结',
+                        'article_dict': article_list,
+                        'compliance_dict': None,
+                        'noncompliance_dict': None}
+        result_data = generate_body(test_content).replace('\n', '').replace(' ', '')
+        self.assertEqual(result_data, test_data)
