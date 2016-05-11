@@ -3,3 +3,4 @@ unittest2
 IMAPClient==1.0.1
 mock
 PyMySQL
+jinja2

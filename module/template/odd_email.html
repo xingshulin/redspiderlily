@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Email</title>
+</head>
+<body>
+    <p>Hello guys,</p>
+    <p>
+    <p>又是一个周末, 我们来看看本周大家分享的精彩话题</p>
+    <br>
+    <table border="1" cellspacing="0">
+        <tr>
+          <th style='padding:5px 10px 5px 10px'><strong>topic</strong></th>
+          <th style='padding:5px 10px 5px 10px'><strong>author</strong></th>
+        </tr>
+        {% for topic, author in articles.items() %}
+        <tr>
+          <td style='padding:5px 10px 5px 10px'><strong>{{ topic }}</strong></td>
+          <td style='padding:5px 10px 5px 10px'><strong>{{ author }}</strong></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

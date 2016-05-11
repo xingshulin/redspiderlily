@@ -20,10 +20,9 @@ username = settings.get('EMAIL_USERNAME')
 password = settings.get('EMAIL_PASSWORD')
 folder_study = settings.get('FOLDER_STUDY')
 ssl = False
-server = IMAPClient(host, use_uid=True, ssl=ssl)
 
 
-def save_full_messages(search_ids=[]):
+def save_full_messages(search_ids=[], server=None):
     sum_num = 0
     check_num = 0
     for msgid in search_ids:
@@ -45,7 +44,7 @@ def get_from_addr_from_envelope(envelope):
     return envelope.from_[0].__str__()
 
 
-def list_message_headers(search_ids=[]):
+def list_message_headers(search_ids=[], server=None):
     sender_list = []
     subject_list = []
     for msgid in search_ids:
@@ -62,6 +61,7 @@ def list_message_headers(search_ids=[]):
 
 
 def get_mail_senders_and_subjects_by_duration(_from=date(2015, 5, 1), _to=date(2016, 5, 1)):
+    server = IMAPClient(host, use_uid=True, ssl=ssl)
     server.login(username, password)
     select_info = server.select_folder(folder_study)
     print('%d messages in study' % select_info[b'EXISTS'])
@@ -72,8 +72,8 @@ def get_mail_senders_and_subjects_by_duration(_from=date(2015, 5, 1), _to=date(2
     print("%d messages that are in duration" % len(messages))
 
     print("Messages:")
-    senders, subjects = list_message_headers(messages)
-    # total_subjects = save_full_messages(messages)
+    senders, subjects = list_message_headers(messages, server)
+    # total_subjects = save_full_messages(messages, server)
 
     subjects = []
     for (sender, subject) in zip(senders, subjects):

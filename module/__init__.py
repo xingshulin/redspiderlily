@@ -33,6 +33,7 @@ if os.path.exists(CFG_PATH):
     email_username = parser.get('EMAIL', 'username')
     email_password = parser.get('EMAIL', 'password')
     email_host = parser.get('EMAIL', 'host')
+    email_smtp_host = parser.get('EMAIL', 'smtp_host')
     email_ssl = parser.get('EMAIL', 'ssl')
 
     database_host = parser.get('DATABASE', 'host')
@@ -66,4 +67,6 @@ settings['SQL_NAME'] = sql_names
 settings['EMAIL_USERNAME'] = email_username
 settings['EMAIL_PASSWORD'] = email_password
 settings['EMAIL_HOST'] = email_host
+settings['SMTP_HOST'] = email_smtp_host
 settings['EMAIL_SSL'] = email_ssl
+
