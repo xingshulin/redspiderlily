@@ -34,13 +34,12 @@ class ReportGeneratorTest(TestCase):
                         'article_dict': article_list,
                         'compliance_dict': None,
                         'noncompliance_dict': None}
-        send(test_content)
+        # send(test_content)
         print("mail had been sent")
 
     def test_smtp_generate_body_properly(self):
         test_file = open('template/odd_email_test_file.html', 'r', encoding='utf-8')
         test_data = test_file.read().replace('\n', '').replace(' ', '')
-        print(test_data)
         article_list = {'abc': 'jack@xingshulin.com', 'bcd': 'john@xingshulin.com'}
         test_content = {'to': 'wangzhe@xingshulin.com',
                         'subject': '[双周学习分享]单周总结',

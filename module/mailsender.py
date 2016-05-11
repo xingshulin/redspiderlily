@@ -1,9 +1,7 @@
-import os
+import collections
 import smtplib
-import inspect
 from email.mime.text import MIMEText
 
-import collections
 from jinja2 import Template
 
 from module import settings
