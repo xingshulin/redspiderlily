@@ -18,5 +18,5 @@ def write_cvs_items(filename='mails.csv', rows=[]):
         csvwriter.writerow([item for item in items])
 
 
-def read_mail_template(path='/odd_email.html'):
-    return open(mail_path + path, 'r', encoding='utf-8').read()
+def read_mail_template(path='odd_email.html'):
+    return open(mail_path + '/' + path, 'r', encoding='utf-8').read()

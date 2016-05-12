@@ -7,27 +7,21 @@
     <font size="3"><strong>Hello XSLer,</strong></font>
 </p>
 <p>
-<p style="line-height: normal; font-family: 'lucida Grande', Verdana;">
-    <font size="2">周一早, 我们来看看上周大家分享的精彩话题, 还没写的同学加油喽!</font>
-</p>
-<br>
+{% block prologue %}
+{% endblock %}
 <table border="1" cellspacing="0">
     <tr>
         <th style='padding:5px 10px 5px 10px'><strong>topic</strong></th>
         <th style='padding:5px 10px 5px 10px'><strong>author</strong></th>
     </tr>
-
+    {% for topic, author in articles.items() %}
     <tr>
-        <td style='padding:5px 10px 5px 10px'><strong>abc</strong></td>
-        <td style='padding:5px 10px 5px 10px'><strong>QingCloud&lt;noreply+0@qingcloud.com&gt;</strong></td>
+        <td style='padding:5px 10px 5px 10px'><strong>{{ topic|e }}</strong></td>
+        <td style='padding:5px 10px 5px 10px'><strong>{{ author|e }}</strong></td>
     </tr>
-
-    <tr>
-        <td style='padding:5px 10px 5px 10px'><strong>bcd</strong></td>
-        <td style='padding:5px 10px 5px 10px'><strong>john@xingshulin.com</strong></td>
-    </tr>
-
+    {% endfor %}
 </table>
+{% block footer %}
 <br>
 <p style="line-height: normal; font-family: 'lucida Grande', Verdana;">
     <font size="2">如果你对双周学习分享有任何问题,欢迎到这里查阅参考资料.</font>
@@ -60,5 +54,6 @@
         </div>
     </div>
 </div>
+{% endblock %}
 </body>
 </html>
