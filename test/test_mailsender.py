@@ -20,14 +20,6 @@ class MailSenderTest(TestCase):
         pass
 
     @staticmethod
-    def test_generate_report_when_target_duration_has_been_fixed():
-        """----------------Verify behavior-----------------------------"""
-        # result = generate(_from, _to)
-        #
-        # self.assertEqual(result, date(2016, 5, 1))
-        pass
-
-    @staticmethod
     def test_smtp_sender_works():
         if not ONLINE_TEST_WITH_REAL_MAIL_AND_DB:
             return
@@ -42,7 +34,7 @@ class MailSenderTest(TestCase):
     def test_smtp_generate_body_properly(self):
         test_file = open('template/odd_email_test_file.html', 'r', encoding='utf-8')
         test_data = test_file.read().replace('\n', '').replace(' ', '')
-        article_list = {'abc': 'jack@xingshulin.com', 'bcd': 'john@xingshulin.com'}
+        article_list = {'abc': 'QingCloud<noreply+0@qingcloud.com>', 'bcd': 'john@xingshulin.com'}
         test_content = {'to': 'wangzhe@xingshulin.com',
                         'subject': '[双周学习分享]单周总结',
                         'article_dict': article_list,
