@@ -1,13 +1,13 @@
+import os
 import unittest
+
+from os.path import isfile, join
 
 __author__ = 'Jack'
 
-test_modules = [
-    'test.test_fileutil',
-    'test.test_mailfetcher',
-    'test.test_mailutil',
-    'test.test_namefetcher']
-
+test_path = os.path.dirname(__file__)
+test_modules = ['test.' + f.replace('.py', '') for f in os.listdir(test_path) if
+                 (isfile(join(test_path, f)) and f.startswith('test') and f.endswith('py'))]
 suite = unittest.TestSuite()
 
 for t in test_modules:

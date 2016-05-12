@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import mock
 from unittest2 import TestCase
+
 from module.namefetcher import get_names
 
 __author__ = 'Jack'

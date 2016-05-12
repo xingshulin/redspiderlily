@@ -4,12 +4,13 @@ from datetime import date
 import collections
 from unittest2 import TestCase
 
-from module.report import is_odd_week, is_even_week, compose_odd_email
+from module.report import is_odd_week, is_even_week, compose_odd_email, generate
+from test.constant import ONLINE_TEST_WITH_REAL_MAIL_AND_DB
 
 __author__ = 'Jack'
 
 
-class ReportGeneratorTest(TestCase):
+class ReportTest(TestCase):
     _from = None
     _to = None
 
@@ -19,12 +20,13 @@ class ReportGeneratorTest(TestCase):
         _to = date(2016, 5, 1)
         pass
 
-    @staticmethod
-    def test_generate_report_when_target_duration_has_been_fixed():
+    def test_generate_report_when_target_duration_has_been_fixed(self):
         """----------------Verify behavior-----------------------------"""
-        # result = generate(_from, _to)
-        #
-        # self.assertEqual(result, date(2016, 5, 1))
+        if not ONLINE_TEST_WITH_REAL_MAIL_AND_DB:
+            return
+        result = generate(_from, _to)
+
+        self.assertEqual(result, date(2016, 5, 1))
         pass
 
     def test_is_odd_week_when_gap_equal_to_7(self):
@@ -44,5 +46,9 @@ class ReportGeneratorTest(TestCase):
         senders = ['a', 'b', 'c']
         subjects = ['me', 'you', 'he']
         msg_content = compose_odd_email(senders, subjects)
-        print(msg_content)
-        self.assertEqual(collections.OrderedDict(msg_content.items()), collections.OrderedDict(test_content.items()))
+        self.assertEqual(msg_content['to'], test_content['to'])
+        self.assertEqual(msg_content['compliance_dict'], test_content['compliance_dict'])
+        self.assertEqual(msg_content['noncompliance_dict'], test_content['noncompliance_dict'])
+        self.assertEqual(msg_content['subject'], test_content['subject'])
+        self.assertEqual(msg_content['article_dict'], test_content['article_dict'])
+

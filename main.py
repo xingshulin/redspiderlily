@@ -1,3 +1,4 @@
+from module import report
 from module.mailfetcher import get_mail_senders_and_subjects_by_duration
 
 __author__ = 'Jack'
@@ -23,11 +24,12 @@ def filter_colleagues_who_is_not_in_senders(sender_list, colleague_list):
 
 if __name__ == "__main__":
     global not_send_list
-    not_send_list = []
-    senders = get_mail_senders_and_subjects_by_duration()
+    report.generate()
+    # not_send_list = []
+    # senders = get_mail_senders_and_subjects_by_duration()
     # colleagues = get_names()
 
     # not_send_list = filter_colleagues_who_is_not_in_senders(senders, colleagues)
     # print "%i out of %i colleagues do not send yet" % (len(not_send_list), len(colleagues))
 
-    print(senders)
+    # print(senders)
