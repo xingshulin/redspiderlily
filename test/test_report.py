@@ -5,7 +5,7 @@ import mock
 from unittest2 import TestCase
 
 from module.report import is_odd_week, is_even_week, compose_odd_week_email, generate, compose_even_week_email
-from test.constant import ONLINE_TEST_WITH_REAL_MAIL_AND_DB, ONLINE_TEST_SEND_MAIL
+from test.constant_in_test import ONLINE_TEST_WITH_REAL_MAIL_AND_DB, ONLINE_TEST_SEND_MAIL
 
 __author__ = 'Jack'
 
@@ -19,6 +19,14 @@ class ReportTest(TestCase):
         _from = date(2016, 5, 2)
         _to = date(2016, 5, 9)
         pass
+
+    # def test_online(self):
+    #     """----------------Verify behavior-----------------------------"""
+    #     global _from, _to
+    #     _from = date(2016, 5, 2)
+    #     _to = date(2016, 5, 9)
+    #     result = generate(_from, _to)
+    #     self.assertTrue(result)
 
     @mock.patch('module.report.get_mail_senders_and_subjects_by_duration',
                 return_value=(['QingCloud<noreply+0@qingcloud.com>',

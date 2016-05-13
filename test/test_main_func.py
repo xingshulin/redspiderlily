@@ -3,7 +3,7 @@
 from unittest2 import TestCase
 
 from main import filter_colleagues_who_is_not_in_senders
-from test.constant import ONLINE_TEST_WITH_REAL_MAIL_AND_DB
+from test.constant_in_test import ONLINE_TEST_WITH_REAL_MAIL_AND_DB
 
 __author__ = 'Jack'
 

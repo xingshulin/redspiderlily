@@ -4,8 +4,7 @@ from datetime import date
 from unittest2 import TestCase
 
 from module.mailsender import send
-from module.report import generate_body
-from test.constant import ONLINE_TEST_WITH_REAL_MAIL_AND_DB
+from test.constant_in_test import ONLINE_TEST_WITH_REAL_MAIL_AND_DB
 
 __author__ = 'Jack'
 

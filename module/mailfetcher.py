@@ -75,11 +75,11 @@ def get_mail_senders_and_subjects_by_duration(_from=date(2015, 5, 1), _to=date(2
     senders, subjects = list_message_headers(messages, server)
     # total_subjects = save_full_messages(messages, server)
 
-    subjects = []
+    output_list = []
     for (sender, subject) in zip(senders, subjects):
-        subjects.append(combine_sender_n_subject(sender, subject))
-    write_cvs_items(rows=subjects)
-    print("总数为 %s" % len(senders))
+        output_list.append(combine_sender_n_subject(sender, subject))
+    write_cvs_items(rows=output_list)
+    print("总数为 %s" % len(senders), len(subjects))
 
     server.logout()
     return senders, subjects
