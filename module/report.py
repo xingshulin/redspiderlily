@@ -6,6 +6,7 @@ from jinja2 import Environment, DictLoader
 from module.fileutil import read_mail_template
 from module.mailfetcher import get_mail_senders_and_subjects_by_duration
 from module.mailsender import send
+from module.namefetcher import get_names
 
 
 def generate_body(pages, **kwargs):
@@ -36,11 +37,18 @@ def compose_odd_week_email(authors, topics):
     return msg_content
 
 
+def total_peers():
+    return len(get_names())
+
+
 def compose_even_week_email(**kwargs):
     article_dict = dict(zip(kwargs.get('topics', []), kwargs.get('authors', [])))
     article_dict = collections.OrderedDict(sorted(article_dict.items()))
     pages = ('base.html', 'even_email.html')
-    body = generate_body(pages, articles=article_dict, topic_count=2, unsubmitted=1)
+    article_count = len(article_dict)
+    peers_count = total_peers()
+    body = generate_body(pages, articles=article_dict, topic_count=article_count,
+                         unsubmitted=(peers_count - article_count))
     msg_content = {'to': 'wangzhe@xingshulin.com',
                    'subject': '[双周学习分享]双周汇总',
                    'body': body}

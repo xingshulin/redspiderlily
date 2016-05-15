@@ -15,7 +15,8 @@ db = None
 
 
 def open_db():
-    db = pymysql.connect(host=host, port=int(port), user=username, passwd=password, db=database)
+    global db
+    db = pymysql.connect(host=host, port=int(port), user=username, passwd=password, db=database, charset="utf8")
     return db.cursor()
 
 

@@ -3,6 +3,7 @@ import mock
 from unittest2 import TestCase
 
 from module.namefetcher import get_names
+from test.constant_in_test import ONLINE_TEST_PEER_QUANPIN_NAME_IN_TEST_NAME_FETCHER
 
 __author__ = 'Jack'
 
@@ -21,4 +22,10 @@ class MailFetcherTest(TestCase):
         self.assertEqual(result[0], 'prettyboy')
         self.assertEqual(result[2], 'spikerlily')
 
+    def test_online_peer_quanpin_name_on_may_13th(self):
+        """----------------Verify behavior-----------------------------"""
+        if not ONLINE_TEST_PEER_QUANPIN_NAME_IN_TEST_NAME_FETCHER:
+            return
+        result = get_names()
+        self.assertEqual(len(result), 53)
 
