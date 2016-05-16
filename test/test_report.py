@@ -73,7 +73,7 @@ class ReportTest(TestCase):
         test_file = open('template/even_email_test_file.html', 'r', encoding='utf-8')
         test_body = test_file.read().replace('\n', '').replace(' ', '')
         test_content = {'to': 'wangzhe@xingshulin.com',
-                        'subject': '[双周学习分享]双周汇总',
+                        'subject': '[双周学习分享]双周结束汇总',
                         'body': test_body}
 
         senders = ['QingCloud<noreply+0@qingcloud.com>', 'john@xingshulin.com']
@@ -99,7 +99,7 @@ class ReportTest(TestCase):
         test_file = open('template/odd_email_test_file.html', 'r', encoding='utf-8')
         test_body = test_file.read().replace('\n', '').replace(' ', '')
         test_content = {'to': 'wangzhe@xingshulin.com',
-                        'subject': '[双周学习分享]单周总结',
+                        'subject': '[双周学习分享]单周结束总结',
                         'body': test_body}
 
         senders = ['QingCloud<noreply+0@qingcloud.com>', 'john@xingshulin.com']

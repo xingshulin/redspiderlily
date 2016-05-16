@@ -16,11 +16,14 @@
     </tr>
     {% for topic, author in articles.items() %}
     <tr>
-        <td style='padding:5px 10px 5px 10px'><strong>{{ topic|e }}</strong></td>
-        <td style='padding:5px 10px 5px 10px'><strong>{{ author|e }}</strong></td>
+        <td style='padding:5px 10px 5px 10px'>{{ topic|e }}</td>
+        <td style='padding:5px 10px 5px 10px'>{{ author|e }}</td>
     </tr>
     {% endfor %}
 </table>
+<p style="line-height: normal; font-family: 'lucida Grande', Verdana;">
+    <font size="2">注:内容以周一凌晨0点00分00秒,到周日晚上23点59分59秒.以实际收到邮箱时间戳为准</font>
+</p>
 {% block footer %}
 <br>
 <p style="line-height: normal; font-family: 'lucida Grande', Verdana;">

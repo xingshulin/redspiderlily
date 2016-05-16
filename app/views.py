@@ -5,7 +5,7 @@ from module.report import generate
 
 
 def index(request):
-    _from = date(2016, 5, 2)
+    _from = date(2016, 5, 9)
     _to = date(2016, 5, 16)
     result = generate(_from, _to)
     if result:

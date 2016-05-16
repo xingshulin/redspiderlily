@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block prologue %}
+<p style="line-height: normal; font-family: 'lucida Grande', Verdana;">
+    <font size="2">本周起共收到{{ topic_count }}篇文章. 遗憾的是{{ unsubmitted }}位童靴没写</font>
+</p>
+<p style="line-height: normal; font-family: 'lucida Grande', Verdana;">
+    <font size="2">没有打成目标的童靴列表</font>
+</p>
+<table border="1" cellspacing="0">
+    <tr>
+        <th style='padding:5px 10px 5px 10px'><strong>name</strong></th>
+        <th style='padding:5px 10px 5px 10px'><strong>submit_times</strong></th>
+    </tr>
+    {% for topic, author in articles.items() %}
+    <tr>
+        <td style='padding:5px 10px 5px 10px'><strong>{{ name|e }}</strong></td>
+        <td style='padding:5px 10px 5px 10px'><strong>{{ submit_times|e }}</strong></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
