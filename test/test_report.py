@@ -105,7 +105,7 @@ class ReportTest(TestCase):
         senders = ['QingCloud<noreply+0@qingcloud.com>', 'john@xingshulin.com']
         subjects = ['abc', 'bcd']
 
-        msg_content = compose_odd_week_email(senders, subjects)
+        msg_content = compose_odd_week_email(authors=senders, topics=subjects)
         self.assertEqual(msg_content['to'], test_content['to'])
         self.assertEqual(msg_content['subject'], test_content['subject'])
         self.assertEqual(msg_content['body'].replace('\n', '').replace(' ', ''), test_content['body'])

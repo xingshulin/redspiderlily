@@ -26,12 +26,12 @@ def is_even_week(_from, _to):
     return timedelta(14).__eq__(_to - _from)
 
 
-def compose_odd_week_email(authors, topics):
-    article_dict = dict(zip(topics, authors))
+def compose_odd_week_email(**kwargs):
+    article_dict = dict(zip(kwargs.get('topics', []), kwargs.get('authors', [])))
     article_dict = collections.OrderedDict(sorted(article_dict.items()))
     pages = ('base.html', 'odd_email.html')
     body = generate_body(pages, articles=article_dict)
-    msg_content = {'to': 'all@xingshulin.com',
+    msg_content = {'to': kwargs.get('mail_group', "wangzhe@xingshulin.com"),
                    'subject': '[双周学习分享]单周结束总结',
                    'body': body}
     return msg_content
@@ -49,7 +49,7 @@ def compose_even_week_email(**kwargs):
     peers_count = total_peers()
     body = generate_body(pages, articles=article_dict, topic_count=article_count,
                          unsubmitted=(peers_count - article_count))
-    msg_content = {'to': 'wangzhe@xingshulin.com',
+    msg_content = {'to': kwargs.get('mail_group', "wangzhe@xingshulin.com"),
                    'subject': '[双周学习分享]双周结束汇总',
                    'body': body}
     return msg_content
@@ -59,17 +59,19 @@ def compose_summary_email(kwargs):
     return None
 
 
-def generate(_from=date(2016, 5, 1), _to=date(2016, 5, 2)):
+def generate(_from=date(2016, 5, 9), _to=date(2016, 5, 16), mail_group="wangzhe@xingshulin.com"):
     senders, subjects = get_mail_senders_and_subjects_by_duration(_from, _to)
 
     if senders is None or subjects is None or len(senders) == 0 or len(subjects) == 0:
         return False
 
     if is_odd_week(_from, _to):
-        msg_content = compose_odd_week_email(senders, subjects)
+        msg_content = compose_odd_week_email(authors=senders, topics=subjects,
+                                             mail_group=mail_group)
     elif is_even_week(_from, _to):
         peers_count = 3
-        msg_content = compose_even_week_email(authors=senders, topics=subjects, peers=peers_count)
+        msg_content = compose_even_week_email(authors=senders, topics=subjects, peers=peers_count,
+                                              mail_group=mail_group)
     else:
         compose_summary_email(senders, subjects)
 
