@@ -16,5 +16,7 @@ RUN apt-get update && apt-get install -y \
 		sqlite3 \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
+COPY /apps/config.ini /usr/src/app/module
+
 EXPOSE 8000
 ENTRYPOINT ["python3", "manage.py", "runserver", "0.0.0.0:8000"]

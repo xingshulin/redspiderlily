@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import pymysql.cursors
-from module import settings
 
+from module import settings
 
 # Open database connection
 host = settings.get('DATABASE_HOST')

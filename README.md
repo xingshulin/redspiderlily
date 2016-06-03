@@ -16,6 +16,7 @@ python main.py
 *	compare and find out the ones who are not send yet
 
 for example:
+
 ```
 curl 'http://server/app/?_from=2016-5-9&_to=2016-5-16&mail_group=name@company.com'
 ```

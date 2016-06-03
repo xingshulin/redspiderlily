@@ -6,7 +6,6 @@ from module.report import generate
 
 def generate_report(request):
     params = request.GET
-    print(params)
     _from = params.get('_from', '2016-5-9')
     _to = params.get('_to', '2016-5-16')
     mail_group = params.get('mail_group', ['wangzhe@xingshulin.com'])
