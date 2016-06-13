@@ -25,3 +25,7 @@ def index(request):
         return HttpResponse("")
     else:
         return HttpResponseServerError("")
+
+
+def status(request):
+    return HttpResponse("It works")
