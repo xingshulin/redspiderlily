@@ -25,7 +25,7 @@ fi
 server=$1
 mail=$2
 
-initDate="2016-06-27"
+initDate="2016-07-04"
 startDays=$(date2days ${initDate:0:4} ${initDate:5:2} ${initDate:8:2})
 sysDays=$(date2days `date +"%Y %m %d"`)
 
