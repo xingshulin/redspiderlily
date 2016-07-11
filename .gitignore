@@ -6,7 +6,6 @@
 
 #Config files
 module/config.ini
-looptime.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
