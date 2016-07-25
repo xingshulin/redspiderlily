@@ -32,7 +32,7 @@ def compose_odd_week_email(**kwargs):
     pages = ('base.html', 'odd_email.html')
     body = generate_body(pages, articles=article_dict)
     msg_content = {'to': kwargs.get('mail_group', "wangzhe@xingshulin.com"),
-                   'subject': '[双周学习分享]单周结束总结',
+                   'subject': '[单周结束总结]',
                    'body': body}
     return msg_content
 
@@ -50,7 +50,7 @@ def compose_even_week_email(**kwargs):
     body = generate_body(pages, articles=article_dict, topic_count=article_count,
                          unsubmitted=(peers_count - article_count))
     msg_content = {'to': kwargs.get('mail_group', "wangzhe@xingshulin.com"),
-                   'subject': '[双周学习分享]双周结束汇总',
+                   'subject': '[双周结束汇总]',
                    'body': body}
     return msg_content
 
