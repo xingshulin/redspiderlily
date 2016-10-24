@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
+from collections import Counter
 from datetime import date
 
 import mock
 from unittest2 import TestCase
 
 from module.namefetcher import get_names
-from module.report import is_odd_week, is_even_week, compose_odd_week_email, generate, compose_even_week_email
+from module.report import is_odd_week, is_even_week, compose_odd_week_email, generate, compose_even_week_email, \
+    compose_summary_email
 from test.constant_in_test import ONLINE_TEST_GENERATE_REPORT, ONLINE_TEST_REAL_WORLD
-
 
 __author__ = 'Jack'
 
@@ -83,6 +84,14 @@ class ReportTest(TestCase):
         self.assertEqual(msg_content['to'], test_content['to'])
         self.assertEqual(msg_content['subject'], test_content['subject'])
         self.assertEqual(msg_content['body'].replace('\n', '').replace(' ', ''), test_content['body'])
+
+    def test_compose_summary_email(self):
+        senders = ['QingCloud<noreply+0@qingcloud.com>', 'john@xingshulin.com', 'jack@xingshulin.com',
+                   'john@xingshulin.com']
+        subjects = ['abc', 'bcd', 'msd', 'musp']
+
+        compose_summary_email(authors=senders, topics=subjects)
+        # self.assertEqual(msg_content['to'], test_content['to'])
 
     def test_is_odd_week_when_gap_equal_to_7(self):
         self.assertTrue(is_odd_week(date(2016, 5, 9), date(2016, 5, 16)))

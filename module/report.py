@@ -1,4 +1,4 @@
-import collections
+from collections import Counter
 from datetime import date, timedelta
 
 from jinja2 import Environment, DictLoader
@@ -55,7 +55,10 @@ def compose_even_week_email(**kwargs):
     return msg_content
 
 
-def compose_summary_email(kwargs):
+def compose_summary_email(**kwargs):
+    author_counts = Counter(kwargs.get('authors', []))
+    for key, value in author_counts.items():
+        print(str(key) + " | " + str(value))
     return None
 
 
@@ -73,7 +76,7 @@ def generate(_from=date(2016, 5, 9), _to=date(2016, 5, 16), mail_group="wangzhe@
         msg_content = compose_even_week_email(authors=senders, topics=subjects, peers=peers_count,
                                               mail_group=mail_group)
     else:
-        compose_summary_email(senders, subjects)
+        compose_summary_email(authors=senders, topics=subjects, mail_group=mail_group)
 
     send(msg_content)
 
