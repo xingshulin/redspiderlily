@@ -3,5 +3,5 @@ node {
    checkout scm
    echo 'Hello World 1'
    stage 'Stage 2'
-   sh 'sh looptime.sh 192.168.8.4:32775 wangzhe@xingshulin.com'
+   sh 'bash looptime.sh 192.168.8.4:32775 wangzhe@xingshulin.com'
 }

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# to compliant POSIX syntax
 date2days() {
     echo "$*" | awk '{
         z=int((14-$2)/12); y=$1+4800-z; m=$2+12*z-3;
