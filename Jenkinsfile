@@ -1,5 +1,6 @@
 node {
    stage 'Stage 1'
+   checkout scm
    echo 'Hello World 1'
    sh 'pwd'
    sh 'ls'
