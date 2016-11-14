@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-function date2days {
+date2days() {
     echo "$*" | awk '{
         z=int((14-$2)/12); y=$1+4800-z; m=$2+12*z-3;
         j=int((153*m+2)/5)+$3+y*365+int(y/4)-int(y/100)+int(y/400)-2472633;
