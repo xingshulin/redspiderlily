@@ -38,15 +38,15 @@ echo "mod days:" ${dayGap}
 _to=`date +%Y-%m-%d`
 
 if [ "$dayGap" = "7" ]; then
-    _from=`date -v -7d +%Y-%m-%d`
+    _from=`[ "$(uname)" = Linux ] && date --date="7 days ago" +"%Y"-"%m"-"%d" || date -v-7d +"%Y"-"%m"-"%d"`
     cmd="curl http://"${server}"/app/?_from="${_from}"&_to="${_to}"&mail_group="${mail}
     echo ${cmd}
-    ${cmd}
+    # ${cmd}
 elif [ "$dayGap" = "0" ]; then
-    _from=`date -v -14d +%Y-%m-%d`
+    _from=`[ "$(uname)" = Linux ] && date --date="14 days ago" +"%Y"-"%m"-"%d" || date -v-14d +"%Y"-"%m"-"%d"`
     cmd="curl http://"${server}"/app/?_from="${_from}"&_to="${_to}"&mail_group="${mail}
     echo ${cmd}
-    ${cmd}
+    # ${cmd}
 else
     echo "not fit to mail criteria"
 fi
